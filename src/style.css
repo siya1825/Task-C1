@@ -909,3 +909,279 @@ footer {
         height: 140px;
     }
 }
+
+
+/* P4 Navbar */
+
+.navbar {
+    width: 100%;
+    min-height: 70px;
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+.navbar-logo {
+    flex-shrink: 0;
+}
+
+.navbar-logo a {
+    text-decoration: none;
+    color: #222222;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.navbar-search input {
+    width: 300px;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.navbar-search button {
+    height: 40px;
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #333333;
+    color: white;
+
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    white-space: nowrap;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 15px;
+}
+
+.navbar-links a:hover {
+    color: #000000;
+}
+
+.navbar-links .post-button {
+    padding: 9px 18px;
+
+    background: #333333;
+    color: white;
+
+    border-radius: 5px;
+}
+
+.navbar-links .post-button:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+/* Login Section */
+
+.login-section {
+    min-height: 70vh;
+    padding: 70px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.login-card h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+.login-subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #555;
+    font-size: 16px;
+}
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.login-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #222;
+    background: white;
+}
+
+.login-field input::placeholder {
+    color: #777;
+}
+
+.login-field input:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #222;
+}
+
+.login-message {
+    margin-top: 20px;
+    text-align: center;
+    color: #c62828;
+    font-size: 15px;
+}
+
+.signup-link {
+    margin-top: 20px;
+    text-align: center;
+    color: #444;
+}
+
+.signup-link a {
+    color: #222;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.signup-link a:hover {
+    color: #000;
+}
+
+
+/* Signup Section */
+
+.signup-section {
+    min-height: 70vh;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.signup-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.signup-card h2 {
+    text-align: center;
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.signup-subtitle {
+    text-align: center;
+    margin: 0 0 30px;
+    color: #666;
+}
+
+.signup-field {
+    margin-bottom: 20px;
+}
+
+.signup-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.signup-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.signup-field input:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    opacity: 0.9;
+}
+
+.signup-message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+}

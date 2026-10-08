@@ -1,6 +1,9 @@
+import { useState } from "react";
 import ArticleCard from "./ArticleCard";
 
 function Articles() {
+
+    const [showAll, setShowAll] = useState(false);
 
     const articles = [
         {
@@ -31,23 +34,27 @@ function Articles() {
         },
 
         {
-    title: "Introduction to Cloud Computing",
-    description:
-        "Learn how cloud computing works and how organisations use cloud services.",
-    author: "Priya",
-    rating: "4.8",
-    image: "/images/article4.jpg"
-},
+            title: "Introduction to Cloud Computing",
+            description:
+                "Learn how cloud computing works and how organisations use cloud services.",
+            author: "Priya",
+            rating: "4.8",
+            image: "/images/article4.jpg"
+        },
 
-{
-    title: "Understanding Data Science",
-    description:
-        "Discover how data science uses data to find useful patterns and insights.",
-    author: "Riya",
-    rating: "4.7",
-    image: "/images/article5.jpg"
-}
+        {
+            title: "Understanding Data Science",
+            description:
+                "Discover how data science uses data to find useful patterns and insights.",
+            author: "Riya",
+            rating: "4.7",
+            image: "/images/article5.jpg"
+        }
     ];
+
+    const visibleArticles = showAll
+        ? articles
+        : articles.slice(0, 3);
 
     return (
         <section id="articles">
@@ -59,7 +66,7 @@ function Articles() {
 
             <div className="articles">
 
-                {articles.map((article) => (
+                {visibleArticles.map((article) => (
                     <ArticleCard
                         key={article.title}
                         image={article.image}
@@ -71,10 +78,13 @@ function Articles() {
                 ))}
 
             </div>
-             <button className="see-more">
-             See all articles →
-            </button>
 
+            <button
+                className="see-more"
+                onClick={() => setShowAll(!showAll)}
+            >
+                {showAll ? "Show less ↑" : "See all articles →"}
+            </button>
 
         </section>
     );

@@ -1,41 +1,27 @@
 import "./style.css";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Banner from "./components/Banner";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Gallery from "./components/Gallery";
-import Articles from "./components/Articles";
-import Tutorials from "./components/Tutorials";
-import Newsletter from "./components/Newsletter";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 function App() {
     return (
-        <>
+        <BrowserRouter>
             <Navbar />
 
-            <main>
-                <Banner />
-
-                <About />
-
-                <Projects />
-
-                <Gallery />
-
-                <Articles />
-
-                <Tutorials />
-
-                <Newsletter />
-
-                <Contact />
-            </main>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+            </Routes>
 
             <Footer />
-        </>
+        </BrowserRouter>
     );
 }
 

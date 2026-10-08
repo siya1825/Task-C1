@@ -43,7 +43,7 @@ function About() {
                         <div>
                             ✉️
                             <strong>Email</strong>
-                            <span>siya@example.com</span>
+                            <span>siyadhamija80@gmail.com</span>
                         </div>
 
                     </div>
