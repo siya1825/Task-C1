@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 function Signup() {
@@ -9,10 +10,13 @@ function Signup() {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    const navigate = useNavigate();
+
     const handleSignup = async (e) => {
         e.preventDefault();
 
         try {
+            // Create account in Firebase Authentication
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 email,
@@ -21,16 +25,14 @@ function Signup() {
 
             const user = userCredential.user;
 
+            // Save user's name and email in Firestore
             await setDoc(doc(db, "users", user.uid), {
                 fullName: fullName,
                 email: email
             });
 
-            setMessage("Account created successfully!");
-
-            setFullName("");
-            setEmail("");
-            setPassword("");
+            // Go directly to Home after successful signup
+            navigate("/");
         } catch (error) {
             setMessage(error.message);
         }
@@ -84,7 +86,10 @@ function Signup() {
                         />
                     </div>
 
-                    <button type="submit" className="signup-button">
+                    <button
+                        type="submit"
+                        className="signup-button"
+                    >
                         Sign Up
                     </button>
 
@@ -95,6 +100,11 @@ function Signup() {
                         {message}
                     </p>
                 )}
+
+                <p className="login-link">
+                    Already have an account?{" "}
+                    <Link to="/login">Login</Link>
+                </p>
 
             </div>
         </section>
