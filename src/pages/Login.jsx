@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+
+import {
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "firebase/auth";
+
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
@@ -15,12 +21,19 @@ function Login() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-
             navigate("/");
         } catch (error) {
-            setMessage(
-                "Login failed. Please check your email and password or sign up."
-            );
+            setMessage("Login failed. Please check your email and password.");
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+            navigate("/");
+        } catch (error) {
+            setMessage("Google login failed. Please try again.");
         }
     };
 
@@ -61,10 +74,21 @@ function Login() {
                     </button>
                 </form>
 
+                <div className="google-divider">
+                    <span>OR</span>
+                </div>
+
+                <button
+                    type="button"
+                    className="google-login-button"
+                    onClick={handleGoogleLogin}
+                >
+                    <span className="google-icon">G</span>
+                    Continue with Google
+                </button>
+
                 {message && (
-                    <p className="login-message">
-                        {message}
-                    </p>
+                    <p className="login-message">{message}</p>
                 )}
 
                 <p className="signup-link">

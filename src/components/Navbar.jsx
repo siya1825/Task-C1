@@ -1,7 +1,6 @@
-
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ user, onLogout }) {
     const navItems = [
         { label: "Home", href: "#home" },
         { label: "About Me", href: "#about" },
@@ -9,13 +8,12 @@ function Navbar() {
         { label: "Gallery", href: "#gallery" },
         { label: "Articles", href: "#articles" },
         { label: "Tutorials", href: "#tutorials" },
-        { label: "Contact", href: "#contact" },
-        { label: "Subscribe", href: "#subscribe" },
+        { label: "Newsletter", href: "#subscribe" },
+        { label: "Contact", href: "#contact" }
     ];
 
     return (
         <>
-            {/* Left Sidebar */}
             <aside className="sidebar">
                 <div className="logo">
                     <h2>Siya ✨</h2>
@@ -31,7 +29,6 @@ function Navbar() {
                 </nav>
             </aside>
 
-            {/* Existing Top Navbar */}
             <nav className="navbar">
                 <div className="navbar-logo">
                     <Link to="/">DEV@Deakin</Link>
@@ -40,15 +37,36 @@ function Navbar() {
                 <div className="navbar-search">
                     <input
                         type="text"
-                        placeholder="Search..."
-                        aria-label="Search"
+                        placeholder="Search sections..."
+                        aria-label="Search sections"
                     />
                     <button type="button">Search</button>
                 </div>
 
                 <div className="navbar-links">
-                    <Link to="/login">Login</Link>
-                    <Link to="/post">Post</Link>
+                    <Link to="/">Home</Link>
+
+                    {user ? (
+                        <>
+                            <Link to="/post">Post</Link>
+                            <span className="user-email">
+                                {user.email}
+                            </span>
+                            <button
+                                type="button"
+                                onClick={onLogout}
+                                className="logout-button"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/post">Post</Link>
+                            <Link to="/login">Login</Link>
+                            <Link to="/signup">Sign Up</Link>
+                        </>
+                    )}
                 </div>
             </nav>
         </>

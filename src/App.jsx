@@ -1,4 +1,3 @@
-
 import "./style.css";
 
 import {
@@ -8,16 +7,16 @@ import {
     Navigate
 } from "react-router-dom";
 
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
-import Post from "./pages/Post.jsx";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Post from "./pages/Post";
 
 import { auth } from "./firebase";
 
@@ -25,86 +24,50 @@ function App() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Check whether a user is logged in
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(
-            auth,
-            (currentUser) => {
-                setUser(currentUser);
-                setLoading(false);
-            }
-        );
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setLoading(false);
+        });
 
         return () => unsubscribe();
     }, []);
 
-    // Wait for Firebase to check authentication
+    const handleLogout = async () => {
+        await signOut(auth);
+    };
+
     if (loading) {
-        return <p>Loading...</p>;
+        return <p>Loading website...</p>;
     }
 
     return (
         <BrowserRouter>
-            {/* Show navigation only when logged in */}
-            {user && <Navbar />}
+            <Navbar user={user} onLogout={handleLogout} />
 
             <Routes>
-                {/* Home page: login required */}
-                <Route
-                    path="/"
-                    element={
-                        user ? (
-                            <Home />
-                        ) : (
-                            <Navigate
-                                to="/login"
-                                replace
-                            />
-                        )
-                    }
-                />
+                {/* Complete homepage is public */}
+                <Route path="/" element={<Home />} />
 
-                {/* Login page */}
+                {/* Login */}
                 <Route
                     path="/login"
-                    element={<Login />}
+                    element={user ? <Navigate to="/" replace /> : <Login />}
                 />
 
-                {/* Always allow the Sign Up form to open */}
-                <Route
-                    path="/signup"
-                    element={<Signup />}
-                />
+                {/* Signup */}
+                <Route path="/signup" element={<Signup />} />
 
-                {/* Post page: login required */}
+                {/* Post requires login */}
                 <Route
                     path="/post"
-                    element={
-                        user ? (
-                            <Post />
-                        ) : (
-                            <Navigate
-                                to="/login"
-                                replace
-                            />
-                        )
-                    }
+                    element={user ? <Post /> : <Navigate to="/login" replace />}
                 />
 
-                {/* Redirect unknown routes */}
-                <Route
-                    path="*"
-                    element={
-                        <Navigate
-                            to="/"
-                            replace
-                        />
-                    }
-                />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 
-            {/* Show footer only when logged in */}
-            {user && <Footer />}
+            <Footer />
         </BrowserRouter>
     );
 }
